@@ -1,0 +1,38 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: continuous-checkout-resiliency-workflow
+  namespace: checkout-mesh
+spec:
+  entry: resiliency-serial-pipeline
+  templates:
+    - name: resiliency-serial-pipeline
+      templateType: Serial
+      deadline: 5m
+      children:
+        - inject-network-latency
+        - inject-pod-eviction
+        - verify-slo-recovery
+    - name: inject-network-latency
+      templateType: NetworkChaos
+      deadline: 1m
+      networkChaos:
+        action: delay
+        mode: all
+        selector:
+          labelSelectors:
+            app: policy-engine
+        delay:
+          latency: "45ms"
+    - name: inject-pod-eviction
+      templateType: PodChaos
+      deadline: 1m
+      podChaos:
+        action: pod-kill
+        mode: one
+        selector:
+          labelSelectors:
+            app: policy-engine
+    - name: verify-slo-recovery
+      templateType: Suspend
+      deadline: 30s

@@ -1,0 +1,29 @@
+{
+  "incidentId": "CHAOS-DRILL-2026-1025",
+  "service": "resilient-checkout-mesh",
+  "generatedAt": "2026-10-25T12:21:17.243Z",
+  "metrics": {
+    "totalTelemetryEvents": 12,
+    "mttdMs": 145,
+    "mttrMs": 820,
+    "errorBudgetBurnRatio": 0.008,
+    "p99LatencyUnderChaosMs": 185,
+    "steadyStateRestored": true
+  },
+  "blastRadius": {
+    "impactedServices": [
+      "policy-engine",
+      "ledger-db"
+    ],
+    "isolatedServices": [
+      "api-gateway"
+    ],
+    "regionalFailoverVerified": true,
+    "circuitBreakerContainedCascade": true
+  },
+  "remediationActions": [
+    "Enforce 300ms circuit-breaker cooldown with async queue fallback on ledger-db timeouts.",
+    "Maintain minimum 3 replicas in policy-engine ReplicaSet with PodDisruptionBudget minAvailable=2.",
+    "Keep automated SLI abort gate armed at P95 > 150ms in production Game Days."
+  ]
+}

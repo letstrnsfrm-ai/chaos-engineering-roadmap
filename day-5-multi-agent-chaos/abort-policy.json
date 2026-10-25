@@ -1,0 +1,13 @@
+{
+  "experimentName": "autonomous-multi-agent-chaos-campaign",
+  "sliGuardrails": {
+    "maxAllowedLatencyMs": 150,
+    "maxConsecutiveErrors": 2,
+    "autoRollbackOnBreach": true
+  },
+  "attackSequence": [
+    { "step": 1, "name": "Mild Latency Probe (30ms)", "config": { "latencyMs": 30, "dbDeadlockActive": false } },
+    { "step": 2, "name": "Regional Partition Failover", "config": { "latencyMs": 20, "partitionPrimaryRegion": true } },
+    { "step": 3, "name": "Severe Latency + Deadlock Breach (180ms)", "config": { "latencyMs": 180, "dbDeadlockActive": true } }
+  ]
+}

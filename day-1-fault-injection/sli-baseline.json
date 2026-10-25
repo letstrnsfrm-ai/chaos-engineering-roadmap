@@ -1,0 +1,11 @@
+{
+  "service": "checkout-mesh",
+  "steadyStateHypothesis": {
+    "maxP95LatencyMs": 200,
+    "minSuccessRate": 0.995
+  },
+  "injectedFault": {
+    "latencyMs": 45,
+    "jitterMs": 10
+  }
+}

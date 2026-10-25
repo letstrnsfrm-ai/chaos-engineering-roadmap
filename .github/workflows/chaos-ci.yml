@@ -1,0 +1,22 @@
+name: Continuous Chaos & Resiliency Verification Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  chaos-resiliency-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Execute 7-Day Chaos Engineering & Resiliency Suite
+        run: npm test

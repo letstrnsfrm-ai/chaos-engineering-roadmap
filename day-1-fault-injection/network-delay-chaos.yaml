@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: policy-engine-latency-injection
+  namespace: checkout-mesh
+spec:
+  action: delay
+  mode: all
+  selector:
+    namespaces:
+      - checkout-mesh
+    labelSelectors:
+      app: policy-engine
+  delay:
+    latency: "45ms"
+    correlation: "50"
+    jitter: "10ms"
+  duration: "2m"

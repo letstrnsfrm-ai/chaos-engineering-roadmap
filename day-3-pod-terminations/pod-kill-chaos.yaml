@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: policy-engine-random-pod-kill
+  namespace: checkout-mesh
+spec:
+  action: pod-kill
+  mode: one
+  selector:
+    namespaces:
+      - checkout-mesh
+    labelSelectors:
+      app: policy-engine
+  gracePeriod: 0

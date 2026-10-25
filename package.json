@@ -1,0 +1,33 @@
+{
+  "name": "chaos-engineering-roadmap",
+  "version": "1.0.0",
+  "description": "Standalone reference repository for AI Chaos Engineering & Autonomous Resiliency (7-Day Sprint)",
+  "main": "test-runner.js",
+  "scripts": {
+    "start": "node mesh-server/server.js",
+    "test": "node test-runner.js",
+    "test:day1": "cd day-1-fault-injection && node inject-latency.js",
+    "test:day2": "cd day-2-network-partitions && node simulate-partition.js",
+    "test:day3": "cd day-3-pod-terminations && node pod-kill-drill.js",
+    "test:day4": "cd day-4-database-deadlocks && node circuit-breaker-drill.js",
+    "test:day5": "cd day-5-multi-agent-chaos && node chaos-orchestrator-agent.js",
+    "test:day6": "cd day-6-automated-postmortem && node postmortem-auditor.js",
+    "test:day7": "cd day-7-cicd-chaos-gates && node chaos-ci-gate.js --report ../day-6-automated-postmortem/postmortem-report.json --max-mttr-ms 3000 --max-error-budget-burn 0.02"
+  },
+  "keywords": [
+    "chaos-engineering",
+    "chaos-mesh",
+    "fault-injection",
+    "sre",
+    "resiliency",
+    "circuit-breaker",
+    "ai-agents",
+    "auto-remediation"
+  ],
+  "author": "Let's Transform AI Quality Engineering",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/letstrnsfrm-ai/chaos-engineering-roadmap.git"
+  }
+}
